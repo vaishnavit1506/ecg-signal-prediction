@@ -24,6 +24,7 @@ input_chunk_length = 100
 output_chunk_length = 20
 
  Model Architecture
+ 
 The forecasting model is a TransformerModel with the following configuration:
 Encoder–Decoder Transformer architecture
 Multi-head self-attention
@@ -40,11 +41,13 @@ Loss function: Mean Squared Error (via Gaussian likelihood)
 The model contains approximately 372K trainable parameters.
 
  Training & Forecasting
+ 
 The transformer is trained on the ECG training series with past covariates.
 After training, the model autoregressively predicts the validation segment.
 Forecasts are compared against ground truth ECG signals.
 
  Evaluation
+ 
 Metric Used
 Root Mean Square Error (RMSE)
 Result
@@ -52,18 +55,21 @@ Transformer RMSE: 0.3842
 This value reflects how closely the predicted ECG signal follows the actual normalized signal.
 
 Visualization
+
 Two plots are generated:
 Full-length plot: shows complete signal and forecast (visually dense)
 Zoomed validation plot: focuses on recent ECG trends to better understand prediction direction and behavior
 The zoomed visualization improves interpretability by reducing visual clutter while preserving trend information.
 
 Notes & Limitations
+
 Training was limited to 10 epochs due to computational constraints (CPU-only execution).
 Increasing epochs may improve performance but significantly increases training time.
 This implementation focuses on signal forecasting, not disease classification.
 Dataset details (sampling rate, patient labels) are not incorporated in this version.
 
 Future Work
+
 Extend to classification tasks (e.g., arrhythmia detection)
 Experiment with longer input windows and deeper transformers
 Compare with LSTM/GRU-based models
@@ -71,6 +77,7 @@ Incorporate additional ECG features (frequency-domain, wave morphology)
 Train on GPU for larger-scale experiments
 
 Tech Stack
+
 Python
 DARTS
 PyTorch Lightning
@@ -78,6 +85,7 @@ Scikit-learn
 NumPy, Pandas, Matplotlib
 
 Application Domain
+
 Biomedical Signal Processing
 Healthcare AI
 Time-Series Forecasting
